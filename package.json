@@ -1,0 +1,34 @@
+{
+  "name": "unity-transitions-panels",
+  "version": "0.0.1",
+  "description": "Panels where the panel transitions are implemented by (Transition) components attached to the panel.",
+  "main": "index.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/beatthat/unity-panel-interfaces.git"
+  },
+  "files": [
+    "index.js",
+    "scripts",
+    "src"
+  ],
+  "author": "larrykirschner@gmail.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/beatthat/unity-panel-interfaces/issues"
+  },
+  "homepage": "https://github.com/beatthat/unity-panel-interfaces",
+  "scripts": {
+    "postinstall": "node scripts/postinstall.js",
+    "install:test": "rm -f *.tgz && npm pack && cd test && npm run clean && npm install",
+    "clean": "rm -f *.tgz && cd test && npm run clean"
+  },
+  "dependencies": {
+    "mkdirp": "^0.5.1",
+    "ncp": "^2.0.0",
+    "unity-transition-interfaces": "github:beatthat/unity-transition-interfaces#semver:^0.0.2",
+    "unity-transitions": "github:beatthat/unity-transitions#semver:^0.0.2",
+    "unity-panel-interfaces": "github:beatthat/unity-panel-interfaces#semver:^0.0.2",
+    "unity-type-utils": "github:beatthat/unity-type-utils#semver:^0.0.4"
+  }
+}
