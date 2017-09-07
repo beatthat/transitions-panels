@@ -1,11 +1,8 @@
 using UnityEditor;
 using UnityEngine;
-
-using System.Collections.Generic;
-
 using BeatThat.Anim;
-using BeatThat.UI;
 using System;
+using System.Collections.Generic;
 
 namespace BeatThat.UI.Comp
 {
@@ -135,7 +132,7 @@ namespace BeatThat.UI.Comp
 			
 			DisplayTransitionAction("Delete", () => { 
 				DestroyImmediate(t as Component);
-				EditorGUIUtility.ExitGUI(); // have to kill this draw iteration because we're destroying a sibling game object
+				GUIUtility.ExitGUI(); // have to kill this draw iteration because we're destroying a sibling game object
 			});
 			
 			GUILayout.EndHorizontal();
@@ -148,7 +145,7 @@ namespace BeatThat.UI.Comp
 			GUILayout.EndHorizontal();
 		}
 		
-		private void DisplayTransitionAction(string label, System.Action a)
+		private void DisplayTransitionAction(string label, Action a)
 		{
 			GUILayout.BeginHorizontal();
 			if(GUILayout.Button(label, GUILayout.Width(COL_WIDTH_ACTION))) {
@@ -164,7 +161,7 @@ namespace BeatThat.UI.Comp
 					
 			AddTransitionCommand[] opts = this.addTransitionOpts;
 			
-			System.Func<string[]> getOptNames = () => {
+			Func<string[]> getOptNames = () => {
 				List<string> tmp = new List<string>();
 				foreach(AddTransitionCommand c in opts) {
 					tmp.Add(c.displayName);
@@ -209,20 +206,11 @@ namespace BeatThat.UI.Comp
 	
 						var cmdTypes = TypeUtils.FindTypesByAssignableType<AddTransitionCommand>();
 						foreach(var c in cmdTypes) {
-							try {
-								var curCmd = c.GetConstructor(noArgTypes).Invoke(noArgs) as AddTransitionCommand;
-								if(curCmd != null) {
-									cmds.Add(curCmd);
-								}
-							}
-							catch(Exception e) {
-								Debug.LogError(e);
+							var curCmd = c.GetConstructor(noArgTypes).Invoke(noArgs) as AddTransitionCommand;
+							if(curCmd != null) {
+								cmds.Add(curCmd);
 							}
 						}
-//						cmds.Add(new AddAnimTransition());
-//						cmds.Add(new AddTweenFromToTransition());
-//						cmds.Add(new AddTweenToTransition());
-//						cmds.Add(new AddFadeCanvasTransition());
 						
 						m_addTransitionOpts = cmds.ToArray();
 					}
@@ -231,12 +219,12 @@ namespace BeatThat.UI.Comp
 			}
 		}
 		
-		private bool TryAddTransitionOpt(string className, List<AddTransitionCommand> cmds)
+		private static bool TryAddTransitionOpt(string className, ICollection<AddTransitionCommand> cmds)
 		{
 			try {
 				Type t = Type.GetType(className);
 				if(t != null) {
-					AddTransitionCommand c = t.GetConstructor(new Type[0]).Invoke(new object[0]) 
+					var c = t.GetConstructor(new Type[0]).Invoke(new object[0]) 
 						as AddTransitionCommand;
 					
 					if(c != null) {
@@ -251,16 +239,12 @@ namespace BeatThat.UI.Comp
 					Debug.LogWarning ("Type '" + className + "' not found");
 				}
 			}
-			catch(System.Exception e) {
+			catch(Exception e) {
 				Debug.LogWarning("Failed to add transition opt with class name '" 
 					+ className + "': " + e.Message);
 				
 			}
 			return false;
-//    	MethodInfo method 
-//             = t.GetMethod("Bar", BindingFlags.Static | BindingFlags.Public);
-//
-//    	method.Invoke(null, null);
 		}
 		
 		public interface AddTransitionCommand

@@ -1,6 +1,6 @@
 using BeatThat.UI;
 
-namespace BeatThat.UI.Comp
+namespace BeatThat
 {
 	public class TransitionsPanel : PanelBase
 	{
