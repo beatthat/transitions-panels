@@ -6,7 +6,7 @@ using UnityEngine;
 namespace BeatThat.UI
 {	
 	/// <summary>
-	/// Standalone POCO implementation of Panel (a panel that has transitions).
+	/// Standalone/POCO implementation of Panel (a panel that has transitions).
 	/// 
 	/// Generally, this will be wrapped by a MonoBehaviour implementation that can attached to a GameObject
 	/// </summary>

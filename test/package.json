@@ -8,7 +8,7 @@
     "clean": "rm -rf node_modules package-lock.json yarn.lock Library Temp Assets"
   },
   "dependencies": {
-    "unity-transitions-panels": "../unity-transitions-panels-0.0.2.tgz"
+    "transitions-panels": "../transitions-panels-0.0.3.tgz"
   },
   "devDependencies": {
     "babel-core": "^5.8.23",
