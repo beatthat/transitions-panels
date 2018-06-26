@@ -1,7 +1,7 @@
 {
   "name": "transitions-panels",
   "scope": "beatthat",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "Panels where the panel transitions are implemented by (Transition) components attached to the panel.",
   "main": "index.js",
   "repository": {
