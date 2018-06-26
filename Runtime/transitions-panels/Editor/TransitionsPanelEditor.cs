@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using BeatThat.Panels;
 using BeatThat.Pools;
+using BeatThat.TypeUtil;
 using UnityEditor;
 using UnityEngine;
 
